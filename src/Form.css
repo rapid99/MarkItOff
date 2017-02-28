@@ -1,0 +1,97 @@
+.inputRow {
+  margin-top: 10px;
+  margin-bottom: 12px;
+  margin-left: 150px;
+  margin-right: 170px;
+  width: 890px;
+  height: 50px;
+  /*border: 4px solid green;*/
+}
+
+i {
+    border: solid rgba(8, 29, 112, 0.7);
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-left: -40px;
+    margin-right: -10px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+i:active {
+    transform: translateY(10px);
+}
+
+.inputSection {
+  font-size: 30px;
+  width: 600px;
+  border-radius: 4px;
+  outline: none;
+  text-align: left;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  margin-right: 200px;
+  margin-left: 25px;
+}
+
+.addBtn {
+  transform: translate(75px, -40px);
+  float: right;
+  width: 320px;
+  border-radius: 4px;
+  background-color: rgba(8, 29, 112, 0.2);
+  border-style: inset;
+  border-color: rgba(8, 29, 112, 0.3);
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-size: 32px;
+  color: rgba(8, 29, 112, 0.4);
+  font-weight: bold;
+  outline: none;
+}
+
+.addBtn:hover {
+  background-color: rgba(8, 29, 112, 0.4);
+}
+
+.addBtn:active {
+  color: rgba(8, 29, 112, 1);
+}
+
+
+.entriesRow {
+  background-color: rgba(8, 29, 112, 0.2);
+  border-style: inset;
+  border-color: rgba(8, 29, 112, 0.3);
+  border-radius: 4px;
+  margin-top: -15px;
+  padding-bottom: 400px;
+  margin-left: 150px;
+  margin-right: 150px;
+  display: block;
+}
+
+.entryContain {
+  margin: 50px 20px;
+  height: 200px;
+}
+
+.entry {
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  float: left;
+  margin: 20px;
+  clear: both;
+  font-size: 20px;
+  color: rgba(8, 29, 112, 0.6);
+}
+
+.entry:hover {
+  background-color: rgba(8, 29, 112, 0.3);
+}
+
+.entry:active:checked {
+  text-decoration: line-through;
+
+}
