@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import './Form.css';
-import lodash from 'lodash';
 import db from './lib/api.js';
 
 export default class Form extends Component {
   constructor(props) {
    super(props);
-   this.state = {data: []}
+   this.state = {data: [], input: ""};
+
 
    this.handleChange = this.handleChange.bind(this);
    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    return this.setState({data: event.target.value});
+    this.setState({input: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    return db.writeRepoData(event);
+    db.writeRepoData(this.state.input);
+    this.setState({input: ""}, this.forceUpdate());
   }
 
   // componentWillMount() {
@@ -32,12 +33,12 @@ export default class Form extends Component {
   }
 
   fetchData() {
-    db.fetchAllRepoData().then((res) => this.setState({data: lodash.values(res)}))
+    db.fetchAllRepoData().then((res) => this.setState({data: res}))
   }
 
  render() {
-   console.log(this.state);
-   console.log(lodash.values(this.state.data));
+   console.log(this.state.input);
+
    return (
      <section>
       <div className="inputRow">
@@ -46,7 +47,7 @@ export default class Form extends Component {
       </div>
       <div className="entriesRow">
         <ul className="entryContain">
-          {this.state.data.map((x) => (<li className="entry">{x}</li>))}
+          {this.state.data.map((x) => (<li key={x} className="entry">{x}</li>))}
         </ul>
       </div>
     </section>
