@@ -13,7 +13,7 @@ const store = firebase.initializeApp(config);
 
 const db = {
   writeRepoData(data) {
-    store.database().ref(`/todos/${data}`).set(data);
+    return store.database().ref(`/todos/${data}`).set(data);
   },
 
   fetchAllRepoData() {
