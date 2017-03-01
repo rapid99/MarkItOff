@@ -1,36 +1,61 @@
 import React, { Component } from 'react';
 import './Form.css';
-import firebase from 'firebase'
-
-function fire($firebaseArray) {
-  const config = {
-    apiKey: "AIzaSyDnNhZfu1Y1l-DKqT82yRVOKMZEINAIwHY",
-    authDomain: "markitoff-c4d41.firebaseapp.com",
-    databaseURL: "https://markitoff-c4d41.firebaseio.com",
-    storageBucket: "markitoff-c4d41.appspot.com",
-    messagingSenderId: "21129935454"
-  };
-
-  const store = firebase.initializeApp(config);
-
-}
-
+import lodash from 'lodash';
+import db from './lib/api.js';
 
 export default class Form extends Component {
+  constructor(props) {
+   super(props);
+   this.state = {data: []}
+
+   this.handleChange = this.handleChange.bind(this);
+   this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    return this.setState({data: event.target.value});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    return db.writeRepoData(event);
+  }
+
+  // componentWillMount() {
+  //   var field = document.getElementsByClassName('entry')[0];
+  //   field.reset();
+  //   return;
+  // }
+
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  fetchData() {
+    db.fetchAllRepoData().then((res) => this.setState({data: lodash.values(res)}))
+  }
+
  render() {
+   console.log(this.state);
+   console.log(lodash.values(this.state.data));
    return (
      <section>
       <div className="inputRow">
-        <i className="arrow down"></i><input type="textbox" placeholder="What needs to be done?" className="inputSection" />
-        <button type="button" className="addBtn">Add</button>
+        <i className="arrow down"></i><input type="text" placeholder="What needs to be done?" onChange={this.handleChange} className="inputSection" />
+        <button type="submit" onClick={this.handleSubmit} className="addBtn">Add</button>
       </div>
       <div className="entriesRow">
         <ul className="entryContain">
-          <li className="entry">This is where items will go</li>
-          <li className="entry">Another item</li>
+          {this.state.data.map((x) => (<li className="entry">{x}</li>))}
         </ul>
       </div>
     </section>
    );
  }
 }
+
+// this.state.data.map((x) => {
+// <li className="entry">{x}</li>
+// })
+
+// object.each((x, key) => x[key])
