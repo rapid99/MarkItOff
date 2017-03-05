@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import lodash from 'lodash';
 
 const config = {
   apiKey: "AIzaSyDnNhZfu1Y1l-DKqT82yRVOKMZEINAIwHY",
@@ -12,7 +13,7 @@ const store = firebase.initializeApp(config);
 
 const db = {
   writeRepoData(data) {
-    store.database().ref(`/todos/${data.name}`).set(data);
+    return store.database().ref(`/todos/${data}`).set(data);
   },
 
   fetchAllRepoData() {
@@ -20,7 +21,7 @@ const db = {
     return repoData.once("value", (snapshot) => {
       return snapshot;
     }).then((res) => {
-      return res.val(); // change this to an array
+      return lodash.values(res.val());
     })
   }
 };
