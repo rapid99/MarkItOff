@@ -1,0 +1,13 @@
+.entry {
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  float: left;
+  margin: 20px;
+  clear: both;
+  font-size: 20px;
+  color: rgba(8, 29, 112, 0.6);
+}
+
+
+.delete {
+  font-size: 22px;
+}

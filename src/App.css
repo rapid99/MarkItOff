@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+  background-color: rgba(8, 29, 112, 0.2);
+}
+
+h2 {
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  font-size: 52px;
+  color: rgba(197, 203, 214, 0.9);
+}
+
+.App-header {
+  background-color: rgba(51, 52, 56, 0.9);
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.foot {
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
