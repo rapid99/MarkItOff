@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Todo from "./Todos";
 import './Form.css';
 import db from './lib/api.js';
 
@@ -12,24 +13,20 @@ export default class Form extends Component {
    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.fetchData()
+  }
+
   handleChange(event) {
     this.setState({input: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    db.writeRepoData(this.state.input);
-    this.setState({input: ""}, this.forceUpdate());
-  }
-
-  // componentWillMount() {
-  //   var field = document.getElementsByClassName('entry')[0];
-  //   field.reset();
-  //   return;
-  // }
-
-  componentDidMount() {
-    this.fetchData()
+    db.writeRepoData(this.state.input).then((success) => {
+      this.setState({input: ""});
+      db.fetchAllRepoData().then((res) => this.setState({data: res}))
+    });
   }
 
   fetchData() {
@@ -37,26 +34,22 @@ export default class Form extends Component {
   }
 
  render() {
-   console.log(this.state.input);
+   const {data, input} = this.state;
 
    return (
      <section>
       <div className="inputRow">
-        <i className="arrow down"></i><input type="text" placeholder="What needs to be done?" onChange={this.handleChange} className="inputSection" />
+        <i className="arrow down"></i><input value={input} type="text" placeholder="What needs to be done?" onChange={this.handleChange} className="inputSection" />
         <button type="submit" onClick={this.handleSubmit} className="addBtn">Add</button>
       </div>
       <div className="entriesRow">
         <ul className="entryContain">
-          {this.state.data.map((x) => (<li key={x} className="entry">{x}</li>))}
+          {data.map((x) => (
+            <li style={{listStyle: 'none'}} key={x}><Todo todo={x} /></li>
+          ))}
         </ul>
       </div>
     </section>
    );
  }
 }
-
-// this.state.data.map((x) => {
-// <li className="entry">{x}</li>
-// })
-
-// object.each((x, key) => x[key])
