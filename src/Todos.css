@@ -7,7 +7,35 @@
   color: rgba(8, 29, 112, 0.6);
 }
 
+.hideTheTodo {
+  display: none;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  float: left;
+  margin: 20px;
+  clear: both;
+  font-size: 20px;
+  color: rgba(8, 29, 112, 0.6);
+}
 
-.delete {
+.showTheTodo {
+  hidden: false;
+  font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  float: left;
+  margin: 20px;
+  clear: both;
+  font-size: 20px;
+  color: rgba(8, 29, 112, 0.6);
+}
+
+
+.comp {
   font-size: 22px;
+}
+
+.deleteX {
+  margin-left: 8px;
+  font-family: "wingdings";
+  font-size: 14px;
+  color: rgba(230,0,0,0.8);
+  cursor: crosshair;
 }

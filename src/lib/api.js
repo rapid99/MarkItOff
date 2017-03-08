@@ -13,7 +13,13 @@ const store = firebase.initializeApp(config);
 
 const db = {
   writeRepoData(data) {
-    return store.database().ref(`/todos/${data}`).set(data);
+    const obj = {
+      data: data,
+      "status": "not_done",
+      "create_time": Date()
+    };
+    const arr = lodash.values(obj);
+    return store.database().ref(`/todos/${data}`).set(arr);
   },
 
   fetchAllRepoData() {
@@ -23,7 +29,10 @@ const db = {
     }).then((res) => {
       return lodash.values(res.val());
     })
-  }
+  },
+
+
+
 };
 
 export default db;
