@@ -37,7 +37,7 @@ export default class Form extends Component {
       <div className="entriesRow">
         <ul className="entryContain">
           {data.map((x) => (
-            <li style={{listStyle: 'none'}} key={x} className="listItem"><Todo todo={x} /></li>
+            <li style={{listStyle: 'none'}} key={x.data} className="listItem"><Todo todo={x} /></li>
           ))}
         </ul>
       </div>

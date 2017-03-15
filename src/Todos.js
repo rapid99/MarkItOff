@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import './Todos.css';
+import db from './lib/railsApi.js';
 
 class Todos extends Component {
 
@@ -16,21 +17,15 @@ class Todos extends Component {
       not_done: !todo.not_done
     }))
   }
-  //need to find a better tag to apply the hide function to
-  //so it hides the entire row
+
   hideTodo() {
     this.setState(todo => ({
       hide_todo: !todo.hide_todo
     }))
-    const element = document.getElementsByClassName('listItem')[0];
-    if (this.state.hide_todo) {
-      element.className = "hideTheTodo";
-    } else {
-      element.className = "showTheTodo";
+    if (confirm("Are you sure you want to archive this Todo?")) {
+      db.updateTodo(this);
     }
   }
-
-
 
   render() {
     const {todo} = this.props;
@@ -42,7 +37,8 @@ class Todos extends Component {
     return (
       <div>
         <p className="entry">
-          <span className="comp" onClick={this.completeToDo}>{completionStatus}</span>{todo}  <span className="deleteX" onClick={this.hideTodo}> &#120;</span>
+          <span className="comp" onClick={this.completeToDo}>{completionStatus}</span>{todo.data}
+          <span className="deleteX" onClick={this.hideTodo}> &#120;</span>
         </p>
       </div>
     );

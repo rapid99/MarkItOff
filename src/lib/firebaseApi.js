@@ -15,11 +15,10 @@ const db = {
   writeRepoData(data) {
     const obj = {
       data: data,
-      "status": "not_done",
-      "create_time": Date()
+      status: "not_done",
+      create_time: Date()
     };
-    const arr = lodash.values(obj);
-    return store.database().ref(`/todos/${data}`).set(arr);
+    return store.database().ref(`/todos/${data}`).set(obj);
   },
 
   fetchAllRepoData() {
@@ -31,7 +30,19 @@ const db = {
     })
   },
 
+ updateTodo(data) {
+   const obj = {
+     data: data,
+     status: "not_done",
+     create_time: Date()
+   };
+   if (obj.status === "not_done") {
+     store.database().ref(`/todos/${data}`).set(status: "done");
+   } else {
+     store.database().ref(`/todos/${data}`).set(status: "not_done");
+   }
 
+ }
 
 };
 

@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import Form from './Form.js'
 import Footer from './Footer.js'
-import db from './lib/api.js';
+import db from './lib/railsApi.js';
 
 
 export default class App extends Component {
   constructor(props) {
    super(props);
    this.state = {data: [] }
+
+   this.writeTodo = this.writeTodo.bind(this);
  }
 
   componentDidMount() {
@@ -20,10 +22,8 @@ export default class App extends Component {
   }
 
   writeTodo(todo) {
-    db.writeRepoData(todo).then((input) => {
-      this.setState({input: ""});
-      db.fetchAllRepoData().then((res) => this.setState({data: res}))
-    });
+    db.writeRepoData(todo);
+    db.fetchAllRepoData().then((res) => this.setState({data: res}))
   }
 
   render() {
