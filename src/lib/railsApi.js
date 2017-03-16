@@ -2,11 +2,15 @@ import axios from 'axios'
 
 const db = {
   writeRepoData(input) {
-    axios.post("todos.json", {
-      create_time: Date(),
-      data: input,
-      status: "not_done"
-    }).then((res) => res.input);
+    const params = {
+      todo: {
+        create_time: Date(),
+        data: input,
+        status: "not_done"
+      }
+    }
+
+    axios.post("http://localhost:3000/todos", params).then((res) => res.input).catch((error) => console.log(error));
   },
 
   fetchAllRepoData() {
