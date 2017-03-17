@@ -22,7 +22,7 @@ export default class App extends Component {
   }
 
   writeTodo(todo) {
-    db.writeRepoData(todo);
+    db.writeRepoData(todo)
     db.fetchAllRepoData().then((res) => this.setState({data: res}))
   }
 
