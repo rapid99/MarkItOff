@@ -17,19 +17,11 @@ const db = {
     return axios.get("http://localhost:3000/todos.json").then((res) => res.data);
   },
 
- updateTodo(data) {
-  //  axios.patch("http://localhost:3000/todos/1/", {status: "done"})
-  //  const obj = {
-  //    data: data,
-  //    status: "not_done",
-  //    create_time: Date()
-  //  };
-  //  if (obj.status === "not_done") {
-  //    store.database().ref(`/todos/${data}`).set(status: "done");
-  //  } else {
-  //    store.database().ref(`/todos/${data}`).set(status: "not_done");
-  //  }
-
+ updateTodo(todo, statusChange) {
+   const params = {todo: {status: statusChange}}
+   axios.patch(`http://localhost:3000/todos/${todo.id}/`, params)
+     .then((success) => console.log(success))
+     .catch((error) => console.log(error))
  }
 
 };

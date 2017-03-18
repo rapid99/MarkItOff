@@ -3,28 +3,16 @@ import './Todos.css';
 import db from './lib/railsApi.js';
 
 class Todos extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {not_done: true, hide_todo: false};
-
-    this.completeToDo = this.completeToDo.bind(this);
-    this.hideTodo = this.hideTodo.bind(this);
+  completeTodo = () => {
+    const {todo} = this.props;
+    event.preventDefault();
+    db.updateTodo(todo, "done");
   }
 
-  completeToDo() {
-    this.setState(todo => ({
-      not_done: !todo.not_done
-    }))
-  }
-
-  hideTodo() {
-    this.setState(todo => ({
-      hide_todo: !todo.hide_todo
-    }))
-    if (confirm("Are you sure you want to archive this Todo?")) {
-      db.updateTodo(this);
-    }
+  hideTodo = () => {
+    const {todo} = this.props;
+    event.preventDefault();
+    db.updateTodo(todo, "archived");
   }
 
   render() {
