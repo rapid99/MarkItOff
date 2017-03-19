@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import Todo from "./Todos";
 import './Form.css';
-import db from './lib/api.js';
 
 export default class Form extends Component {
   constructor(props) {
    super(props);
-   this.state = {data: [], input: ""};
+   this.state = {input: ""};
 
 
    this.handleChange = this.handleChange.bind(this);
    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    this.fetchData()
   }
 
   handleChange(event) {
@@ -22,19 +17,16 @@ export default class Form extends Component {
   }
 
   handleSubmit(event) {
+    this.setState({input: ""});
     event.preventDefault();
-    db.writeRepoData(this.state.input).then((success) => {
-      this.setState({input: ""});
-      db.fetchAllRepoData().then((res) => this.setState({data: res}))
-    });
+    this.props.onWriteTodo(this.state.input);
   }
 
-  fetchData() {
-    db.fetchAllRepoData().then((res) => this.setState({data: res}))
-  }
+
 
  render() {
-   const {data, input} = this.state;
+   const {input} = this.state;
+   const {data} = this.props;
 
    return (
      <section>
@@ -45,7 +37,7 @@ export default class Form extends Component {
       <div className="entriesRow">
         <ul className="entryContain">
           {data.map((x) => (
-            <li style={{listStyle: 'none'}} key={x}><Todo todo={x} /></li>
+            <li style={{listStyle: 'none'}} key={x.data} className="listItem"><Todo todo={x} /></li>
           ))}
         </ul>
       </div>
