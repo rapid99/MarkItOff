@@ -11,7 +11,7 @@ const db = {
     }
 
     axios.post("http://localhost:3000/todos", params).then((res) => res.input).catch((error) => console.log(error));
-  },
+
 
   fetchAllRepoData() {
     return axios.get("http://localhost:3000/todos.json").then((res) => res.data);
